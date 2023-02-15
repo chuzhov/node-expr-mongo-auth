@@ -2,6 +2,7 @@ const { Contact } = require("../../models/index");
 
 const updateStatusContact = async (req, res) => {
   const { contactId } = req.params;
+  console.log(req.params);
   const dbAnswer =
     await Contact.findByIdAndUpdate(
       contactId,

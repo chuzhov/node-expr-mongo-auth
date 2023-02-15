@@ -2,7 +2,7 @@ const express = require("express");
 
 const {
   contacts: ctrl,
-} = require("../../controllers");
+} = require("../../controllers/index");
 const {
   addContactSchema,
   updateContactSchema,
