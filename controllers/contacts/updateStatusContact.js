@@ -1,15 +1,14 @@
 const { Contact } = require("../../models/index");
 
-const updateStatusContact = async (req, res) => {
+const updContactStatus = async (req, res) => {
   const { contactId } = req.params;
-  console.log(req.params);
-  const dbAnswer =
-    await Contact.findByIdAndUpdate(
-      contactId,
-      req.body,
-      { returnDocument: "after" }
-    );
+  const { id: owner } = req.user;
+  const dbAnswer = await Contact.findOneAndUpdate(
+    { contactId, owner },
+    req.body,
+    { returnDocument: "after" }
+  );
   res.status(200).json(dbAnswer);
 };
 
-module.exports = updateStatusContact;
+module.exports = updContactStatus;

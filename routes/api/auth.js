@@ -4,7 +4,10 @@ const {
   users: ctrl,
 } = require("../../controllers/");
 
-const validateBody = require("../../middlewares");
+const {
+  validateBody,
+  auth,
+} = require("../../middlewares");
 
 const {
   addUserSchema,
@@ -23,6 +26,14 @@ router.post(
   "/login",
   validateBody(loginUserSchema),
   ctrl.loginUser
+);
+
+router.post("/logout", auth, ctrl.logoutUser);
+
+router.get(
+  "/current",
+  auth,
+  ctrl.getCurrentUserStatus
 );
 
 module.exports = router;

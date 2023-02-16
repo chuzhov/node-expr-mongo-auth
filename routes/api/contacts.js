@@ -8,36 +8,46 @@ const {
   updateContactSchema,
   updateFavoriteSchema,
 } = require("../validation/index");
-const validateBody = require("../../middlewares/index");
+const {
+  validateBody,
+  auth,
+} = require("../../middlewares/index");
 
 const router = express.Router();
 
-router.get("/", ctrl.getAll);
+router.get("/", auth, ctrl.getAllContacts);
 
-router.get("/:contactId", ctrl.getOne);
+router.get(
+  "/:contactId",
+  auth,
+  ctrl.getOneContact
+);
 
 router.post(
   "/",
+  auth,
   validateBody(addContactSchema),
-  ctrl.add
+  ctrl.addContact
 );
 
 router.put(
   "/:contactId",
+  auth,
   validateBody(updateContactSchema),
-  ctrl.update
+  ctrl.updateContact
 );
 
 router.patch(
   "/:contactId/favorite",
+  auth,
   validateBody(updateFavoriteSchema),
-  ctrl.updateStatusContact
+  ctrl.updContactStatus
 );
 
 router.delete(
   "/:contactId",
-  validateBody(updateFavoriteSchema),
-  ctrl.remove
+  auth,
+  ctrl.removeContact
 );
 
 module.exports = router;

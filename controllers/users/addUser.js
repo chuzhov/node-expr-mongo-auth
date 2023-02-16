@@ -7,7 +7,8 @@ const {
 } = require("../../routes/errors/HttpErrors");
 
 const addUser = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, password } = req.body;
+  //check if user already exist
   const user = await User.findOne({ email });
   if (user) {
     throw HttpError(
@@ -15,21 +16,18 @@ const addUser = async (req, res) => {
       `User with email ${email} is already registered`
     );
   }
-
-  const hashPassword = await bcrypt.hash(
+  //hash password to store in db
+  const hashedPassword = await bcrypt.hash(
     password,
     10
   );
-
-  const result = await User.create({
-    name,
+  const dbAnswer = await User.create({
     email,
-    password: hashPassword,
+    password: hashedPassword,
   });
-
+  //send response to front-end
   res.status(201).json({
-    email: result.email,
-    name: result.name,
+    email: dbAnswer.email,
   });
 };
 

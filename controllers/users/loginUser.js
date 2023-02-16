@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
   }
   //comparing given password with a stored hash:
   const compareResult = await bcrypt.compare(
-    password, // a password from body of the request
+    password, // a password from a body of the request
     user.password // a password from mongoDB
   );
   if (!compareResult) {
@@ -44,6 +44,10 @@ const loginUser = async (req, res) => {
   //sending token in responce to frontend
   res.json({
     token,
+    user: {
+      email,
+      subscription: user.subscription,
+    },
   });
 };
 
