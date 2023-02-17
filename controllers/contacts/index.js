@@ -5,7 +5,7 @@ const addContact = require("./add");
 const getOneContact = require("./getOne");
 const removeContact = require("./remove");
 const updateContact = require("./update");
-const updContactStatus = require("./updateStatusContact");
+const updContactStatus = require("./updStatus");
 
 module.exports = {
   getAllContacts: ctrlWrapper(getAllContacts),
