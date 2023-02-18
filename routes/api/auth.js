@@ -10,10 +10,7 @@ const {
   adminAuth,
 } = require("../../middlewares");
 
-const {
-  addUserSchema,
-  loginUserSchema,
-} = require("../validation/");
+const schema = require("../validation/");
 
 const router = express.Router();
 
@@ -21,13 +18,13 @@ router.get("/", adminAuth, ctrl.getAllUsers);
 
 router.post(
   "/signup",
-  validateBody(addUserSchema),
+  validateBody(schema.addUserSchema),
   ctrl.addUser
 );
 
 router.post(
   "/login",
-  validateBody(loginUserSchema),
+  validateBody(schema.loginUserSchema),
   ctrl.loginUser
 );
 
@@ -37,6 +34,19 @@ router.get(
   "/current",
   auth,
   ctrl.getCurrentUserStatus
+);
+
+router.patch(
+  "/:userId/subscription",
+  adminAuth,
+  validateBody(schema.updateSubscriptionSchema),
+  ctrl.updUserSubscription
+);
+
+router.delete(
+  "/:userId",
+  adminAuth,
+  ctrl.removeUser //and all user's contacts...
 );
 
 module.exports = router;

@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 
 const usersRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
-const adminRouter = require("./routes/api/admin");
 
 const app = express();
 
@@ -23,7 +22,6 @@ app.use(
   bodyParser.urlencoded({ extended: true })
 );
 
-app.use("/admin", adminRouter);
 app.use("/users", usersRouter);
 app.use("/api/contacts", contactsRouter);
 

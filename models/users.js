@@ -24,6 +24,13 @@ const userSchema = Schema(
       type: String,
       enum: usersRoles,
       default: usersRoles[0], //to get admin role you schould edit this field manually
+      validate: {
+        validator: function (value) {
+          value === "admin" ? false : true;
+        },
+        message: (props) =>
+          `${props.value} could not be assigned this way`,
+      },
     },
     subscription: {
       type: String,
@@ -34,6 +41,14 @@ const userSchema = Schema(
   },
   { timestamps: true }
 );
+
+//this is example how to create custom validator for the whole Schema:
+userSchema.methods.validateSchema = function () {
+  const errors = this.validateSync();
+  if (errors) {
+    throw new Error(errors.message);
+  }
+};
 
 const User = model("user", userSchema);
 
