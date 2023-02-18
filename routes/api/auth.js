@@ -7,6 +7,7 @@ const {
 const {
   validateBody,
   auth,
+  adminAuth,
 } = require("../../middlewares");
 
 const {
@@ -15,6 +16,8 @@ const {
 } = require("../validation/");
 
 const router = express.Router();
+
+router.get("/", adminAuth, ctrl.getAllUsers);
 
 router.post(
   "/signup",
