@@ -1,21 +1,32 @@
-## GoIT Node.js Course Homework #4
+# GoIT Node.js Course Homework #4
 
 Продовження створення REST API для роботи з колекцією контактів.
 
-Methods / Endpoints:
-[POST] </users/signup> - реєстрація нового користувача;
-[POST] </users/login> - доступ користувача до сервісу;
-[POST] </users/logout> - видалення токену поточного користувача, вихідз сервісу;
+Користувачі:
+| Method | Endpoint | |
+| ------- | --------- | --- |
+|`POST`| /users/signup | реєстрація нового користувача |
+|`POST`| /users/login | доступ користувача до сервісу;
+|`POST`| /users/logout | видалення токену поточного користувача, вихід із сервісу;
 
-Methods / Service enpoints:
-[GET] <api/contacts> - отримати перелік контактів поточного користувача;
-[GET] <api/contacts?page={first_page}&limit{per_page}> - пагінация відповіді;
-[GET] <api/contacts?sort={key_name}&sort_order{asc|desc}> - сортування відповіді;
-[GET] <api/contacts/{contact_id}> - отримати інформацію про контакти поточного користувача;
-[POST] <api/contacts> - додати до бази контакт поточного користувача;
-[PUT] <api/contacts/{contact_id}> - оновити інформацію про контакти поточного користувача;
-[PATCH] <api/contacts/{contact_id}/favorite> - оновити статус обраного для контакта користувача;
-[DELETE]<api/contacts/{contact_id}> - видалити контакт
+Робота користувача з контактами:
+| Method | Service enpoint | |
+| ------- | --------- | --- |
+| `GET` | api/contacts | отримати перелік контактів поточного користувача;
+| `GET` | api/contacts/{contact_id} | отримати інформацію про контакти поточного користувача;
+| `POST` | api/contacts> | додати до бази контакт поточного користувача;
+| `PUT` | api/contacts/{contact_id} | оновити інформацію про контакти поточного користувача;
+| `PATCH` | api/contacts/{contact_id}/favorite | оновити статус обраного для контакта користувача;
+| `DELETE` | api/contacts/{contact_id} | видалити контакт
+
+Робота адміністратора з користувачами:
+| Method | Endpoint | |
+| ------- | --------- | --- |
+| `GET` | /users | отримання переліку користувачів
+| `PATCH` | /users/{contactID}/subscription | заміна типу/підписки користувача |
+| `DELETE` | /users/{contactID} | видалення користувача та всіх його контактів
+
+> Додати роль адміністратора в цієї моделі можливо лише через інтерфейси MongoDB
 
 ### Команди:
 
