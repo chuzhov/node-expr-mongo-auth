@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const contactSchema = Schema(
   {
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
     name: {
       type: String,
       required: [
@@ -20,7 +24,7 @@ const contactSchema = Schema(
       default: false,
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const Contact = model("contact", contactSchema);

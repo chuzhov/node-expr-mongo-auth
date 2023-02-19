@@ -3,10 +3,12 @@ const {
   HttpError,
 } = require("../../routes/errors/HttpErrors");
 
-const remove = async (req, res) => {
+const removeContact = async (req, res) => {
+  const { _id: owner } = req.user;
   const { contactId } = req.params;
-  const dbAnswer =
-    await Contact.findByIdAndDelete(contactId);
+  const dbAnswer = await Contact.findOneAndDelete(
+    { contactId, owner }
+  );
   if (!dbAnswer)
     throw HttpError(
       404,
@@ -15,4 +17,4 @@ const remove = async (req, res) => {
   res.json(dbAnswer);
 };
 
-module.exports = remove;
+module.exports = removeContact;

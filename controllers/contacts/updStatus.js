@@ -1,9 +1,8 @@
 const { Contact } = require("../../models/index");
 
-const updateContact = async (req, res) => {
-  const { _id: owner } = req.user;
+const updContactStatus = async (req, res) => {
   const { contactId } = req.params;
-
+  const { id: owner } = req.user;
   const dbAnswer = await Contact.findOneAndUpdate(
     { contactId, owner },
     req.body,
@@ -12,4 +11,4 @@ const updateContact = async (req, res) => {
   res.status(200).json(dbAnswer);
 };
 
-module.exports = updateContact;
+module.exports = updContactStatus;

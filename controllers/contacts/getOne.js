@@ -1,11 +1,13 @@
 const { Contact } = require("../../models/index");
 
-const getOne = async (req, res) => {
+const getOneContact = async (req, res) => {
+  const { _id: owner } = req.user;
   const { contactId } = req.params;
-  const dbAnswer = await Contact.findById(
-    contactId
-  );
+  const dbAnswer = await Contact.findById({
+    _id: contactId,
+    owner,
+  });
   res.json(dbAnswer);
 };
 
-module.exports = getOne;
+module.exports = getOneContact;
