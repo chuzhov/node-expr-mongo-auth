@@ -11,6 +11,13 @@ const userSubscriptionTypes = [
 
 const userSchema = Schema(
   {
+    name: {
+      type: String,
+      required: false,
+      default: function () {
+        return this.email;
+      },
+    },
     password: {
       type: String,
       required: true,
@@ -19,6 +26,10 @@ const userSchema = Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    isEmailConfirmed: {
+      type: Boolean,
+      default: false,
     },
     role: {
       type: String,

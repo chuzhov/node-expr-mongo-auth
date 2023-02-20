@@ -19,6 +19,12 @@ const loginUser = async (req, res) => {
       "Email or password is invalid"
     );
   }
+  if (!user.isEmailConfirmed) {
+    throw HttpError(
+      403,
+      "Please confirm your email address to login"
+    );
+  }
   //comparing given password with a stored hash:
   const compareResult = await bcrypt.compare(
     password, // a password from a body of the request
