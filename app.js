@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 
 const usersRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
+const mainRouter = require("./routes/api/mainPage");
 
 const app = express();
 
@@ -22,11 +23,7 @@ app.use(
   bodyParser.urlencoded({ extended: true })
 );
 
-<<<<<<< Updated upstream
-=======
-const mainPage = require("./templates/mainPage");
-app.use("/", mainPageRouter);
->>>>>>> Stashed changes
+app.use("/", mainRouter);
 app.use("/users", usersRouter);
 app.use("/api/contacts", contactsRouter);
 
