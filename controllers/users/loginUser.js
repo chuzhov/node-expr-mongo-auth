@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const { setToken } = require("../../helpers");
 
 const { User } = require("../../models/");
 
@@ -19,6 +19,12 @@ const loginUser = async (req, res) => {
       "Email or password is invalid"
     );
   }
+  if (!user.isEmailConfirmed) {
+    throw HttpError(
+      403,
+      "Please confirm your email address to login"
+    );
+  }
   //comparing given password with a stored hash:
   const compareResult = await bcrypt.compare(
     password, // a password from a body of the request
@@ -34,10 +40,8 @@ const loginUser = async (req, res) => {
   const payload = {
     id: user._id,
   };
-  //creating a token for 1 day long
-  const token = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: "1d",
-  });
+  //creating a token
+  const token = setToken(payload, SECRET_KEY);
   await User.findByIdAndUpdate(user._id, {
     token,
   });

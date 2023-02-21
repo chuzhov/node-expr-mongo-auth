@@ -8,6 +8,7 @@ const {
   validateBody,
   auth,
   adminAuth,
+  emailConfirmation,
 } = require("../../middlewares");
 
 const schema = require("../validation/");
@@ -15,6 +16,12 @@ const schema = require("../validation/");
 const router = express.Router();
 
 router.get("/", adminAuth, ctrl.getAllUsers);
+
+router.get(
+  "/confirm-email",
+  emailConfirmation,
+  ctrl.confirmedByEmail
+);
 
 router.post(
   "/signup",

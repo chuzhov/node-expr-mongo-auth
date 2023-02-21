@@ -5,6 +5,7 @@ const getAllUsers = require("./getAllUsers");
 const getCurrentUserStatus = require("./getCurrentUserStatus");
 const updUserSubscription = require("./updSubscription");
 const removeUser = require("./removeUser");
+const confirmedByEmail = require("./confirmedByEmail");
 
 const ctrlWrapper = require("../ctrlWrapper");
 
@@ -20,4 +21,5 @@ module.exports = {
     updUserSubscription
   ),
   removeUser: ctrlWrapper(removeUser),
+  confirmedByEmail: ctrlWrapper(confirmedByEmail),
 };
