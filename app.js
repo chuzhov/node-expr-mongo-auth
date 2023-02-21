@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const bodyParser = require("body-parser");
 
+const mainPageRouter = require("./routes/api/mainPage");
 const usersRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
 
@@ -22,6 +23,7 @@ app.use(
   bodyParser.urlencoded({ extended: true })
 );
 
+app.use("/", mainPageRouter);
 app.use("/users", usersRouter);
 app.use("/api/contacts", contactsRouter);
 
