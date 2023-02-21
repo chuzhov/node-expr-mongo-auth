@@ -17,16 +17,16 @@ const router = express.Router();
 
 router.get("/", adminAuth, ctrl.getAllUsers);
 
-router.get(
-  "/confirm-email",
-  emailConfirmation,
-  ctrl.confirmedByEmail
-);
-
 router.post(
   "/signup",
   validateBody(schema.addUserSchema),
   ctrl.addUser
+);
+
+router.get(
+  "/confirm-email",
+  emailConfirmation,
+  ctrl.confirmedByEmail
 );
 
 router.post(
