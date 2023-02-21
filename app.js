@@ -22,6 +22,11 @@ app.use(
   bodyParser.urlencoded({ extended: true })
 );
 
+<<<<<<< Updated upstream
+=======
+const mainPage = require("./templates/mainPage");
+app.use("/", mainPageRouter);
+>>>>>>> Stashed changes
 app.use("/users", usersRouter);
 app.use("/api/contacts", contactsRouter);
 
